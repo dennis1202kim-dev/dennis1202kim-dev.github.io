@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="264" viewBox="0 0 600 264" role="img" aria-labelledby="title desc">
+  <title id="title">Bi-directional alpha-2 and gamma lamellae in laser powder bed fusion TiAl</title>
+  <desc id="desc">An orientation schematic shows major-layer lamellae parallel to the vertical build direction and minor-layer lamellae perpendicular to it. Reported nanohardness values are 9.3 plus or minus 0.4 and 10.4 plus or minus 0.8 gigapascals, respectively.</desc>
+  <defs>
+    <pattern id="parallel" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#b8cdcd"/><path d="M3 0v14" stroke="#456674" stroke-width="4"/>
+    </pattern>
+    <pattern id="perpendicular" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#cfdbd4"/><path d="M0 3h14" stroke="#52756b" stroke-width="4"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="264" fill="#e8eee8"/>
+  <path d="M34 56h532" stroke="#a0b4ad"/>
+  <text x="34" y="35" fill="#263f47" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2.3">LAMELLAE AFTER HEAT TREATMENT</text>
+  <path d="M40 151V80m-6 7 6-7 6 7" fill="none" stroke="#29474d" stroke-width="2"/>
+  <text x="40" y="168" fill="#29474d" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700">BD</text>
+  <rect x="74" y="77" width="218" height="82" fill="url(#parallel)" stroke="#617c85"/>
+  <rect x="322" y="77" width="218" height="82" fill="url(#perpendicular)" stroke="#68837a"/>
+  <g fill="#263f47" font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="183" y="185" font-size="16" font-weight="700">Major layer · 0° to BD</text>
+    <text x="431" y="185" font-size="16" font-weight="700">Minor layer · 90° to BD</text>
+    <text x="183" y="217" font-size="22" font-weight="700">9.3 ± 0.4 GPa</text>
+    <text x="431" y="217" font-size="22" font-weight="700">10.4 ± 0.8 GPa</text>
+    <text x="307" y="243" font-size="13">Reported nanohardness</text>
+  </g>
+</svg>

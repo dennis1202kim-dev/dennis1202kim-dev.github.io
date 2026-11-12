@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480" viewBox="0 0 720 480" role="img" aria-labelledby="title desc">
+  <title id="title">Gas turbine stage and blade</title>
+  <desc id="desc">Schematic front view of a turbine wheel, with a separate enlarged view of a blade and its root.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop stop-color="#324e59"/>
+      <stop offset="1" stop-color="#162b36"/>
+    </linearGradient>
+    <linearGradient id="blade-metal" x2="1" y2=".65">
+      <stop stop-color="#97b6bc"/>
+      <stop offset=".48" stop-color="#dae5df"/>
+      <stop offset="1" stop-color="#678a94"/>
+    </linearGradient>
+    <linearGradient id="rim" x2="1" y2="1">
+      <stop stop-color="#a0bdbd"/>
+      <stop offset="1" stop-color="#547881"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0v24" fill="none" stroke="#c2ddde" stroke-opacity=".075"/>
+    </pattern>
+    <path id="rotor-blade" d="M-13-82C-6-99-6-118-13-141l19-4c11 24 13 46 1 64Z"/>
+    <path id="airfoil" d="M455 316c-9-26-9-62 8-111 15-45 43-89 81-115 14-9 35-10 59-3 16 4 30 12 35 20 4 6-3 12-11 16-43 21-73 59-91 100-17 39-21 69-14 96-23 16-45 14-67-3Z"/>
+  </defs>
+  <path fill="url(#background)" d="M0 0h720v480H0z"/>
+  <path fill="url(#grid)" d="M0 0h720v480H0z"/>
+  <path d="M40 60h640M40 417h640" stroke="#9ab7ba" stroke-opacity=".38"/>
+  <g transform="translate(215 242)">
+    <circle r="151" fill="#172d37" stroke="#a2bcbc" stroke-width="2"/>
+    <circle r="143" fill="none" stroke="#5f8590" stroke-width="1"/>
+    <g fill="url(#rim)" stroke="#a7c2c3" stroke-width=".7">
+      <use href="#rotor-blade"/><use href="#rotor-blade" transform="rotate(20)"/><use href="#rotor-blade" transform="rotate(40)"/><use href="#rotor-blade" transform="rotate(60)"/><use href="#rotor-blade" transform="rotate(80)"/><use href="#rotor-blade" transform="rotate(100)"/><use href="#rotor-blade" transform="rotate(120)"/><use href="#rotor-blade" transform="rotate(140)"/><use href="#rotor-blade" transform="rotate(160)"/><use href="#rotor-blade" transform="rotate(180)"/><use href="#rotor-blade" transform="rotate(200)"/><use href="#rotor-blade" transform="rotate(220)"/><use href="#rotor-blade" transform="rotate(240)"/><use href="#rotor-blade" transform="rotate(260)"/><use href="#rotor-blade" transform="rotate(280)"/><use href="#rotor-blade" transform="rotate(300)"/><use href="#rotor-blade" transform="rotate(320)"/><use href="#rotor-blade" transform="rotate(340)"/>
+    </g>
+    <use href="#rotor-blade" transform="rotate(60)" fill="#d9b98f" stroke="#f8deba" stroke-width="1.2"/>
+    <circle r="83" fill="#324b54" stroke="#a7c2c3" stroke-width="1.5"/>
+    <circle r="65" fill="none" stroke="#6d929a" stroke-width="1"/>
+    <circle r="29" fill="#172d37" stroke="#a2bcbc" stroke-width="1.5"/>
+    <circle r="44" fill="none" stroke="#aac5c5" stroke-width="2" stroke-dasharray="2 13.36"/>
+    <path d="M-48 0h96M0-48v96" stroke="#abc5c6" stroke-dasharray="3 5" stroke-opacity=".45"/>
+  </g>
+  <path d="M332 172l69-40h63" fill="none" stroke="#e4c49c" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <circle cx="332" cy="172" r="4" fill="#e4c49c"/>
+  <path d="M446 319c24 14 60 16 89 1l13 14-16 13-13-2-2 10 7 7-2 7-11 2-1 7 5 5-2 7-12 1-3 11-32-6 1-10-12-3 1-8 7-3v-8l-10-3 1-9 7-3-1-9-15-6Z" fill="#587c86" stroke="#c3d6d3" stroke-width="2"/>
+  <use href="#airfoil" fill="url(#blade-metal)" stroke="#e1e9df" stroke-width="2"/>
+  <path d="M464 307c-4-27 2-66 18-107 17-44 44-81 77-107M482 322c-6-28-2-63 12-102 17-45 48-89 83-113 15-10 32-11 50-5M500 322c-5-31 1-65 16-102 16-39 43-73 77-97 13-9 22-12 34-16" fill="none" stroke="#365966" stroke-opacity=".48" stroke-width="1.4"/>
+  <path d="M455 316c18 13 44 17 67 3l13-1M469 343l44 7m-47 13 40 7m-43 13 37 7" fill="none" stroke="#d2e2df" stroke-opacity=".63" stroke-width="1.4"/>
+  <g fill="#dce8e5" font-family="Arial, sans-serif" font-weight="600" font-size="16" letter-spacing="3">
+    <text x="42" y="42">GAS TURBINE STAGE</text>
+    <text x="42" y="450">ROTOR</text>
+    <text x="676" y="450" text-anchor="end">BLADE DETAIL</text>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="264" viewBox="0 0 600 264" role="img" aria-labelledby="title desc">
+  <title id="title">TiAl temperature benchmarks</title>
+  <desc id="desc">On a linear Celsius scale, an earlier TiAl benchmark spans 750 to 800 degrees, and a marker at 950 degrees denotes the KIMS research demonstration.</desc>
+  <rect width="600" height="264" fill="#203944"/>
+  <path d="M34 56h532" stroke="#73909a" stroke-opacity=".62"/>
+  <g fill="#edf4ef" font-family="Arial, sans-serif">
+    <text x="34" y="35" font-size="14" font-weight="700" letter-spacing="2.3">REPORTED TEMPERATURE BENCHMARKS</text>
+    <text x="191" y="101" text-anchor="middle" font-size="15" fill="#b8cdd0">Earlier TiAl alloys</text>
+    <text x="462.5" y="101" text-anchor="middle" font-size="15" fill="#e6cba8">KIMS demonstration</text>
+    <text x="191" y="140" text-anchor="middle" font-size="28" font-weight="700">750–800°C</text>
+    <text x="462.5" y="140" text-anchor="middle" font-size="28" font-weight="700">950°C</text>
+  </g>
+  <path d="M75 177h465" stroke="#aac0c3" stroke-width="2"/>
+  <path d="M75 172v12m155-12v12m155-12v12m155-12v12" stroke="#aac0c3" stroke-width="2"/>
+  <path d="M152.5 177H230" stroke="#a5c8cc" stroke-width="12" stroke-linecap="butt"/>
+  <path d="M152.5 167v20M230 167v20" stroke="#e4efec" stroke-width="1.5"/>
+  <path d="M462.5 162v30" stroke="#eac69b" stroke-width="2"/>
+  <circle cx="462.5" cy="177" r="8" fill="#eac69b"/>
+  <g fill="#c9dbda" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">
+    <text x="75" y="208">700</text><text x="230" y="208">800</text>
+    <text x="385" y="208">900</text><text x="540" y="208">1000</text>
+    <text x="307.5" y="236" font-size="13">Temperature (°C)</text>
+  </g>
+</svg>
