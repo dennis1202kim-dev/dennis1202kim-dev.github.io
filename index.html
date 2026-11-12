@@ -375,6 +375,38 @@
 @media (max-width: 760px) {
   #research-main .research-result-grid { grid-template-columns: 1fr; }
 }
+#research-main #awards-press-title { scroll-margin-top: 24px; }
+#research-main .press-section-intro { color: var(--muted); font-size: 14px; margin-top: 12px; max-width: 580px; }
+#research-main .press-feature-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 68px); align-items: center; }
+#research-main .research-press figure { margin: 0; min-width: 0; }
+#research-main .research-press figure > a { display: block; }
+#research-main .research-press img { display: block; width: 100%; height: auto; border: 1px solid var(--research-rule); }
+#research-main .research-press figcaption { display: block; text-align: left; margin-top: 13px; font-size: 12px; line-height: 1.65; letter-spacing: 0; }
+#research-main .research-press figcaption strong { display: block; color: var(--research-blue); font-size: 13px; font-weight: 650; }
+#research-main .research-press figcaption p { margin: 4px 0; color: var(--muted); }
+#research-main .research-press figcaption .research-link { margin-top: 4px; font-size: 11px; }
+#research-main .press-award-label { color: #87633d; font-size: 10px; letter-spacing: 1.4px; font-weight: 700; }
+#research-main .press-feature-copy h3 { font-family: var(--serif); font-size: clamp(27px, 3.1vw, 42px); font-weight: 400; line-height: 1.2; letter-spacing: -.035em; margin: 17px 0 20px; }
+#research-main .press-award-name { color: var(--research-blue); font-weight: 650; font-size: 14px; margin-bottom: 15px; }
+#research-main .press-feature-copy > p:not(.press-award-label):not(.press-award-name) { color: var(--muted); line-height: 1.8; font-size: 13px; }
+#research-main .press-year-note { border-left: 2px solid #bba386; padding-left: 15px; margin: 20px 0 16px; }
+#research-main .press-year-note strong { color: var(--research-blue); font-weight: 600; }
+#research-main .press-secondary-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(30px, 5vw, 68px); margin-top: 44px; padding-top: 38px; border-top: 1px solid var(--research-rule); align-items: start; }
+#research-main .press-coverage h3 { margin: 0 0 18px; font-size: 20px; }
+#research-main .press-story { display: block; padding: 17px 0 19px; border-top: 1px solid var(--research-rule); }
+#research-main .press-story-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; color: var(--muted); font-size: 10px; letter-spacing: .5px; }
+#research-main .press-story-meta strong { color: #87633d; font-size: 11px; }
+#research-main .press-story-title { display: block; margin: 10px 0 6px; color: var(--research-blue); font-size: 15px; line-height: 1.65; font-weight: 600; word-break: keep-all; }
+#research-main .press-story-title > span { display: inline-block; margin-left: 5px; }
+#research-main .press-story-subtitle { display: block; color: var(--muted); font-size: 11px; line-height: 1.6; }
+#research-main .press-story:hover .press-story-title { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 760px) {
+  #research-main .press-feature-grid, #research-main .press-secondary-grid { grid-template-columns: 1fr; gap: 25px; }
+  #research-main .press-feature-copy h3 { font-size: 32px; }
+  #research-main .press-secondary-grid { margin-top: 30px; padding-top: 30px; }
+  #research-main .press-story-meta { flex-wrap: wrap; gap: 5px 12px; }
+}
+
 </style></head><body><section id="research" class="screen detail-screen"><header class="header wrap split-header"><a class="wordmark" href="#home">SWK<span>김성웅 · LUWA</span></a><nav aria-label="주요 메뉴"><a href="#home" >처음으로</a><a href="#research" aria-current="page">연구자</a><a href="#music" >루와</a></nav></header><main id="research-main" lang="en">
   <section class="research-hero wrap" aria-labelledby="research-name">
     <div class="research-intro">
@@ -384,6 +416,7 @@
       <p class="research-affiliation">Principal Researcher · Extreme Materials Research Institute, KIMS</p>
       <p class="research-lead">I develop lightweight, heat-resistant alloys for aircraft and power-generation turbines at the Korea Institute of Materials Science (KIMS). My work examines how lamellar microstructures in γ-TiAl evolve at high temperatures and affect strength and durability, then applies those findings to alloy design, casting, forging, and additive manufacturing.</p>
       <div class="research-quick-links" role="group" aria-label="Explore the research">
+        <a class="research-link" href="#awards-press-title">Awards &amp; Press <span aria-hidden="true">↓</span></a>
         <a class="research-link" href="#research-figures">Research figures <span aria-hidden="true">↓</span></a>
         <a class="research-link" href="#research-resources-title">Technical resources <span aria-hidden="true">↓</span></a>
       </div>
@@ -403,6 +436,64 @@
     <div><dt>Appointment</dt><dd>KIMS <span>Since 2011</span></dd></div>
     <div><dt>Publications · CV</dt><dd>55 <span>SCI papers</span></dd></div>
   </dl>
+
+  <section class="research-block wrap research-press" aria-labelledby="awards-press-title">
+    <div class="research-section-title">
+      <p class="eyebrow">2026 / RECOGNITION &amp; MEDIA</p>
+      <h2 id="awards-press-title">Awards &amp; Press</h2>
+      <p class="press-section-intro">Recognition for high-temperature TiAl research, and the people behind it.</p>
+    </div>
+    <div class="press-feature-grid">
+      <figure class="press-award-photo">
+        <a href="award-world-no1-2026.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open full-size World No. 1 Technology recognition photo">
+          <img src="award-world-no1-2026.jpg" width="800" height="532" loading="lazy" decoding="async" alt="KIMS World No. 1 Technology recognition photo: Seong-Woong Kim on the left, Young-Sang Na in the center, and Seung-Eon Kim on the right, beside the award plaque.">
+        </a>
+        <figcaption>
+          <strong lang="ko">세계1등기술 선정 기념사진</strong>
+          <p>From left: Seong-Woong Kim, Young-Sang Na, and Seung-Eon Kim.</p>
+          <a class="research-link" href="https://www.kims.re.kr/v17/bbx/board.php?bx_table=05_01&amp;wr_id=762" target="_blank" rel="noopener noreferrer">Photo: KIMS · 2026 press release <span aria-hidden="true">↗</span></a>
+        </figcaption>
+      </figure>
+      <div class="press-feature-copy">
+        <p class="press-award-label">KIMS WORLD NO. 1 TECHNOLOGY</p>
+        <h3>Lightweight alloys.<br>High-temperature impact.</h3>
+        <p class="press-award-name" lang="ko">가스터빈용 950℃ 이상급 TiAl 소재 기술</p>
+        <p>The TiAl technology developed by Seong-Woong Kim's team was selected as a KIMS World No. 1 Technology, recognizing its contribution to lightweight, heat-resistant materials for gas turbines.</p>
+        <p class="press-year-note">Official award: <strong>2025 World No. 1 Technology</strong><br>Recognition and press coverage in <strong>2026</strong>.</p>
+        <a class="research-link" href="https://www.kims.re.kr/v17/bbx/board.php?bx_table=05_01&amp;wr_id=762" target="_blank" rel="noopener noreferrer">KIMS announcement <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="press-secondary-grid">
+      <figure class="press-lab-photo">
+        <a href="research-ebm-team-2026.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open full-size electron-beam additive manufacturing research photo">
+          <img src="research-ebm-team-2026.jpg" width="600" height="399" loading="lazy" decoding="async" alt="Seong-Woong Kim and a colleague examining an electron-beam additive manufacturing system during TiAl alloy research.">
+        </a>
+        <figcaption>
+          <strong>Inside the laboratory</strong>
+          <p>Electron-beam additive manufacturing and microstructure control of high-temperature TiAl alloys.</p>
+          <a class="research-link" href="https://www.kims.re.kr/v17/bbx/board.php?bx_table=05_01&amp;wr_id=762" target="_blank" rel="noopener noreferrer">Photo: KIMS · 2026 <span aria-hidden="true">↗</span></a>
+        </figcaption>
+      </figure>
+      <div class="press-coverage" aria-labelledby="press-coverage-title">
+        <h3 id="press-coverage-title">Selected media coverage</h3>
+        <a class="press-story" href="https://www.etnews.com/20260520000097" target="_blank" rel="noopener noreferrer">
+          <span class="press-story-meta"><strong lang="ko">전자신문</strong><time datetime="2026-05-20">20 MAY 2026</time></span>
+          <span class="press-story-title" lang="ko">950도 초고온 경량 내열 합금, ‘세계 1등 기술’ 선정 <span aria-hidden="true">↗</span></span>
+          <span class="press-story-subtitle">World No. 1 Technology · high-temperature TiAl alloys</span>
+        </a>
+        <a class="press-story" href="https://www.nocutnews.co.kr/news/6520019" target="_blank" rel="noopener noreferrer">
+          <span class="press-story-meta"><strong lang="ko">CBS 노컷뉴스</strong><time datetime="2026-05-20">20 MAY 2026</time></span>
+          <span class="press-story-title" lang="ko">김성웅 박사 연구팀, 2025년 세계 1등 기술 선정 <span aria-hidden="true">↗</span></span>
+          <span class="press-story-subtitle">Research team, laboratory photographs, and technology overview</span>
+        </a>
+        <a class="press-story" href="https://zdnet.co.kr/view/?no=20260423170805" target="_blank" rel="noopener noreferrer">
+          <span class="press-story-meta"><strong>ZDNet Korea</strong><time datetime="2026-04-23">23 APR 2026</time></span>
+          <span class="press-story-title" lang="ko">재료연구 50주년 기념식과 세계1등 기술상 <span aria-hidden="true">↗</span></span>
+          <span class="press-story-subtitle">World No. 1 Technology award recognition at the KIMS anniversary</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <section class="research-block wrap" aria-labelledby="research-figures">
     <div class="research-section-title">
