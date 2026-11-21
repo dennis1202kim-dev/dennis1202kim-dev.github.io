@@ -1,6 +1,6 @@
 김성웅 · LUWA 홈페이지 | 논문 정보 관리
 
-홈페이지    https://dennis1202kim-dev.github.io/#research
+홈페이지    https://dennis1202kim-dev.github.io/research.html
 편집기      https://dennis1202kim-dev.github.io/edit-publications.html
 
 논문이 새로 게재되면
