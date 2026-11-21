@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>논문 관리 · 김성웅</title>
+<style>
+:root{color-scheme:light;--ink:#1e2e2b;--green:#195d4b;--line:#cdd8d2;--muted:#4d625b}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7f4;color:var(--ink);font-family:"Atkinson Hyperlegible Next","Malgun Gothic",sans-serif;line-height:1.6}
+main{width:min(100% - 32px,860px);margin:42px auto 80px}
+header{border-bottom:2px solid var(--green);padding-bottom:18px}
+h1,h2,p{margin:0}h1{font-size:clamp(25px,4vw,36px);letter-spacing:-.04em}h2{font-size:20px}
+header p,.hint{color:var(--muted);font-size:14px;margin-top:5px}
+section{margin:24px 0}.block,details{border:1px solid var(--line);border-radius:8px;background:white}
+.block{padding:18px 20px}.actions,.section-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.section-head{justify-content:space-between;margin-bottom:10px}
+button,.upload{font:inherit;font-size:14px;font-weight:600;color:var(--green);background:white;border:1px solid #97afa3;border-radius:5px;padding:8px 13px;cursor:pointer}
+button:hover,.upload:hover{background:#edf3ef}.primary{background:var(--green);color:white;border-color:var(--green)}.primary:hover{background:#104435}
+button:disabled{opacity:.45;cursor:default}
+:focus-visible{outline:3px solid #32886e;outline-offset:2px}
+label.field{display:grid;gap:4px;font-size:14px;font-weight:600}
+input,textarea{width:100%;border:1px solid #aabbb0;border-radius:4px;padding:9px 11px;font:inherit;font-size:15px;color:var(--ink);background:white}
+input[type=number]{max-width:10em}textarea{resize:vertical}#total{max-width:8em}
+details{margin:8px 0}summary{cursor:pointer;padding:14px 16px;overflow-wrap:anywhere;font-weight:600}
+details[open]>summary{border-bottom:1px solid var(--line)}
+.fields{display:grid;gap:14px;padding:18px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.toolbar{padding:0 18px 18px}.remove{margin-left:auto}.status{margin:10px 0 0;min-height:1.6em;font-weight:600;overflow-wrap:anywhere}
+.error{color:#982e22}fieldset{border:0;padding:0;margin:0;min-width:0}
+@media(max-width:560px){main{margin-top:20px}.pair{grid-template-columns:1fr}.remove{margin-left:0}.toolbar button{padding:6px 9px}}
+</style>
+</head>
+<body><main>
+<header><h1>김성웅 · 논문 관리</h1><p>전체 SCI 논문 수와 대표 논문을 편집할 수 있습니다. 입력 내용은 다운로드한 관리 파일에 저장됩니다.</p></header>
+<nav aria-label="관련 페이지" style="margin-top:14px"><a href="./#research">연구자 홈페이지</a> · <a href="./publications-guide.txt">사용 안내</a></nav>
+<section aria-label="관리 파일"><div class="actions">
+  <button type="button" id="open-file">관리 파일 불러오기</button>
+  <input id="file" type="file" accept=".js" hidden>
+</div><p class="hint" id="source-info"></p></section>
+<form id="editor">
+<fieldset id="controls" disabled>
+<section class="block"><label class="field">전체 SCI 논문 수<input id="total" type="number" min="0" step="1" required></label>
+<p class="hint">대표 목록을 바꿔도 이 숫자는 그대로입니다. 실제 게재 편수가 늘었을 때 직접 수정하세요.</p></section>
+<section><div class="section-head"><h2 id="list-title">대표 논문</h2><button type="button" id="add">+ 대표 논문 추가</button></div>
+<p class="hint">제목을 눌러 수정할 수 있습니다. 위에서부터 홈페이지에 표시됩니다.</p>
+<div id="papers"></div></section>
+<button type="submit" class="primary">publications.js 다운로드</button>
+</fieldset></form>
+<p class="status" id="status" role="status" aria-live="polite"></p>
+</main>
+<template id="paper-template">
+<details>
+<summary></summary>
+<div class="fields">
+<label class="field">논문 제목<input data-key="title" required></label>
+<div class="pair">
+<label class="field">저널명<input data-key="journal" required></label>
+<label class="field">발표 연도<input data-key="year" type="number" min="1000" max="9999" step="1" required></label>
+</div>
+<label class="field">DOI 번호 또는 DOI 링크<input data-key="doi" required spellcheck="false" placeholder="10. 또는 https://doi.org/ 로 시작"></label>
+<label class="field">연구 요약 (선택)<textarea data-key="summary" rows="2"></textarea></label>
+<div class="pair">
+<label class="field">권·쪽 또는 논문 번호 (선택)<input data-key="details"></label>
+<label class="field">저자 역할 (선택)<input data-key="role"></label>
+</div>
+<label class="field">기관 저장소 링크 (선택)<input data-key="repository" type="url" spellcheck="false"></label>
+</div>
+<div class="actions toolbar">
+<button type="button" data-action="up">위로 이동</button>
+<button type="button" data-action="down">아래로 이동</button>
+<button type="button" data-action="remove" class="remove">대표 목록에서 삭제</button>
+</div></details>
+</template>
+<script src="./publications.js"></script>
+<script>
+(() => {
+  "use strict";
+  // Both the public page and the offline editor use these rules.
+function readDoi(value) {
+  let doi = (typeof value === "string" ? value : "").trim();
+  const resolver = /^https?:\/\/(?:dx\.)?doi\.org\//i;
+  if (resolver.test(doi)) {
+    try {
+      doi = decodeURIComponent(doi.replace(resolver, ""));
+    } catch {
+      throw new Error("DOI 주소의 문자 표기를 확인하세요.");
+    }
+  }
+  if (!/^10\.\d{4,9}\/\S+$/u.test(doi)) {
+    throw new Error("DOI 번호(10.으로 시작) 또는 doi.org 링크를 입력하세요.");
+  }
+  return doi;
+}
+
+function validate(data) {
+  if (!data || !Number.isSafeInteger(data.sciTotal) || data.sciTotal < 0) {
+    throw new Error("전체 SCI 논문 수에 0 이상의 정수를 입력하세요.");
+  }
+  if (!Array.isArray(data.selected)) throw new Error("대표 논문 목록을 확인하세요.");
+  const seen = new Set();
+  data.selected.forEach((paper, index) => {
+    try {
+      if (!paper || typeof paper.title !== "string" || !paper.title.trim()) {
+        throw new Error("제목을 입력하세요.");
+      }
+      if (typeof paper.journal !== "string" || !paper.journal.trim()) {
+        throw new Error("저널명을 입력하세요.");
+      }
+      if (!Number.isInteger(paper.year) || paper.year < 1000 || paper.year > 9999) {
+        throw new Error("발표 연도를 네 자리 숫자로 입력하세요.");
+      }
+      const doi = readDoi(paper.doi).toLowerCase();
+      if (seen.has(doi)) throw new Error("같은 DOI가 목록에 두 번 들어 있습니다.");
+      seen.add(doi);
+      for (const key of ["summary", "details", "role", "repository"]) {
+        if (paper[key] != null && typeof paper[key] !== "string") {
+          throw new Error("선택 항목은 글자로 입력하세요.");
+        }
+      }
+      if (paper.repository && !/^https?:\/\//i.test(paper.repository)) {
+        throw new Error("기관 저장소 주소는 https:// 또는 http://로 시작해야 합니다.");
+      }
+      if (paper.repository) new URL(paper.repository);
+    } catch (error) {
+      throw new Error("대표 논문 " + (index + 1) + " · " + error.message);
+    }
+  });
+}
+
+  const form = document.getElementById("editor");
+  const papers = document.getElementById("papers");
+  const total = document.getElementById("total");
+  const status = document.getElementById("status");
+  const controls = document.getElementById("controls");
+  const file = document.getElementById("file");
+  const source = document.getElementById("source-info");
+  let dirty = false;
+
+  function report(message, error = false) {
+    status.classList.toggle("error", error);
+    status.textContent = message;
+  }
+
+  function markEdited() {
+    dirty = true;
+    report("수정 중입니다. 완료하면 publications.js를 다운로드하세요.");
+  }
+
+  function makeCard(paper) {
+    const card = document.getElementById("paper-template").content.firstElementChild.cloneNode(true);
+    for (const input of card.querySelectorAll("[data-key]")) {
+      input.value = paper[input.dataset.key] ?? "";
+    }
+    return card;
+  }
+
+  function setTitle(card) {
+    const title = card.querySelector('[data-key="title"]').value.trim();
+    const year = card.querySelector('[data-key="year"]').value;
+    card.querySelector("summary").textContent = [year, title || "새 대표 논문"].filter(Boolean).join(" · ");
+  }
+
+  function refreshList() {
+    const cards = Array.from(papers.children);
+    document.getElementById("list-title").textContent = "대표 논문 " + cards.length + "편";
+    cards.forEach((card, index) => {
+      setTitle(card);
+      card.querySelector('[data-action="up"]').disabled = index === 0;
+      card.querySelector('[data-action="down"]').disabled = index === cards.length - 1;
+    });
+  }
+
+  function load(data, message) {
+    validate(data);
+    const cards = data.selected.map(makeCard);
+    total.value = data.sciTotal;
+    papers.replaceChildren(...cards);
+    refreshList();
+    controls.disabled = false;
+    source.textContent = message;
+    dirty = false;
+    report("");
+  }
+
+  try {
+    load(window.publications, "현재 publications.js를 열었습니다. 다른 사본을 사용하려면 관리 파일을 불러오세요.");
+  } catch {
+    source.textContent = "저장소에서 받은 최신 publications.js를 불러오세요.";
+  }
+
+  document.getElementById("open-file").addEventListener("click", () => file.click());
+  file.addEventListener("change", async () => {
+    const selected = file.files[0];
+    if (!selected) return;
+    file.value = "";
+    try {
+      const text = await selected.text();
+      const match = text.trim().match(/^window\.publications\s*=\s*([\s\S]*?)\s*;?$/);
+      if (!match) throw new Error("이 홈페이지에서 사용하는 publications.js 파일을 선택하세요.");
+      const data = JSON.parse(match[1]);
+      validate(data);
+      if (dirty && !confirm("불러온 파일로 현재 입력 내용을 교체할까요?")) return;
+      load(data, selected.name + " 파일에서 불러왔습니다.");
+    } catch (error) {
+      source.textContent = "파일을 열 수 없습니다. " + error.message;
+    }
+  });
+
+  form.addEventListener("input", event => {
+    const card = event.target.closest("details");
+    if (card) setTitle(card);
+    markEdited();
+  });
+  form.addEventListener("invalid", event => {
+    const card = event.target.closest("details");
+    if (card) card.open = true;
+    report("표시된 입력란을 확인하세요.", true);
+  }, true);
+  document.getElementById("add").addEventListener("click", () => {
+    const card = makeCard({});
+    papers.prepend(card);
+    card.open = true;
+    refreshList();
+    markEdited();
+    card.querySelector("input").focus();
+  });
+  papers.addEventListener("click", event => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+    const card = button.closest("details");
+    const action = button.dataset.action;
+    if (action === "remove") {
+      if (!confirm("이 논문을 대표 목록에서 삭제할까요? 전체 SCI 논문 수는 직접 조정할 수 있습니다.")) return;
+      card.remove();
+    } else if (action === "up" && card.previousElementSibling) {
+      papers.insertBefore(card, card.previousElementSibling);
+    } else if (action === "down" && card.nextElementSibling) {
+      papers.insertBefore(card.nextElementSibling, card);
+    }
+    refreshList();
+    markEdited();
+  });
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    try {
+      const selected = Array.from(papers.children, card => {
+        const entry = {};
+        for (const input of card.querySelectorAll("[data-key]")) {
+          const value = input.value.trim();
+          if (value) entry[input.dataset.key] = input.type === "number" ? input.valueAsNumber : value;
+        }
+        return entry;
+      });
+      const data = {sciTotal: total.valueAsNumber, selected};
+      validate(data);
+      selected.forEach(paper => { paper.doi = readDoi(paper.doi); });
+      const contents = "window.publications = " + JSON.stringify(data, null, 2) + ";\n";
+      const url = URL.createObjectURL(new Blob([contents], {type:"text/javascript;charset=utf-8"}));
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "publications.js";
+      document.body.append(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      dirty = false;
+      report("수정본을 다운로드했습니다. 홈페이지에 반영하려면 받은 파일을 김성웅 박사님의 GitHub 저장소에 publications.js로 반영해야 합니다.");
+    } catch (error) {
+      report(error.message, true);
+    }
+  });
+  window.addEventListener("beforeunload", event => {
+    if (dirty) { event.preventDefault(); event.returnValue = ""; }
+  });
+})();
+</script>
+</body></html>

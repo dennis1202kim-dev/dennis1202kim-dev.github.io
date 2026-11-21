@@ -550,7 +550,7 @@
   <dl class="research-facts wrap">
     <div><dt>Education</dt><dd>KAIST <span>Ph.D. in Materials Science and Engineering</span></dd></div>
     <div><dt>Appointment</dt><dd>KIMS <span>Since 2011</span></dd></div>
-    <div><dt>Publications · CV</dt><dd>55 <span>SCI papers</span></dd></div>
+    <div><dt>Publications · CV</dt><dd id="sci-total">— <span>SCI papers</span></dd></div>
   </dl>
 
   <section class="research-block wrap research-press" aria-labelledby="awards-press-title">
@@ -782,46 +782,128 @@
       <p class="eyebrow">03 / RESEARCH OUTPUT</p>
       <h2 id="papers-title">Selected Publications</h2>
     </div>
-    <ol class="research-papers">
-      <li>
-        <time>2026</time>
-        <div><h3>Formation of a bi-directional α₂/γ lamellar microstructure through crystallographic texture control in a γ-TiAl alloy fabricated by laser powder bed fusion</h3><p>Crystallographic texture control produced lamellae aligned in two directions.</p><p class="paper-meta"><cite>Journal of Materials Research and Technology</cite> 42, 2625–2637 · Corresponding author</p></div>
-        <div class="paper-access">
-          <a class="research-link" href="https://doi.org/10.1016/j.jmrt.2026.03.273" target="_blank" rel="noopener noreferrer" aria-label="DOI for the laser powder bed fusion TiAl paper">DOI <span aria-hidden="true">↗</span></a>
-          <a class="research-link" href="https://kumoh.scholarworks.kr/item/23f1aafe-48c0-4367-9dc1-4692bcb59355" target="_blank" rel="noopener noreferrer" aria-label="Institutional record for the laser powder bed fusion TiAl paper">Repository <span aria-hidden="true">↗</span></a>
-        </div>
-      </li>
-      <li>
-        <time>2024</time>
-        <div><h3>Effect of forging routes on the microstructure and mechanical properties of newly-developed Ti-44Al-5.5Nb-0.5W-0.5Cr-0.3Si-0.1C alloys</h3><p>Comparison of how different forging routes affect microstructure and tensile properties.</p><p class="paper-meta"><cite>Journal of Alloys and Compounds</cite> 992, 174442 · Corresponding author</p></div>
-        <a class="research-link" href="https://doi.org/10.1016/j.jallcom.2024.174442" target="_blank" rel="noopener noreferrer" aria-label="DOI for the TiAl forging routes paper">DOI <span aria-hidden="true">↗</span></a>
-      </li>
-      <li>
-        <time>2023</time>
-        <div><h3>A high tensile strength above 900 ℃ in β-solidified TiAl alloy through alloy design and microstructure optimization</h3><p>Alloy design and microstructure optimization improved the high-temperature tensile strength of β-solidified TiAl.</p><p class="paper-meta"><cite>Journal of Alloys and Compounds</cite> 947, 169676 · Corresponding author</p></div>
-        <a class="research-link" href="https://doi.org/10.1016/j.jallcom.2023.169676" target="_blank" rel="noopener noreferrer" aria-label="DOI for the high-temperature tensile strength paper">DOI <span aria-hidden="true">↗</span></a>
-      </li>
-      <li>
-        <time>2023</time>
-        <div><h3>Achieving fine fully lamellar microstructure of casting TiAl alloy by simple heat treatment</h3><p>A step heat treatment refined the fully lamellar microstructure of cast TiAl without hot working.</p><p class="paper-meta"><cite>Materials Characterization</cite> 200, 112881 · Corresponding author</p></div>
-        <a class="research-link" href="https://doi.org/10.1016/j.matchar.2023.112881" target="_blank" rel="noopener noreferrer" aria-label="DOI for the cast TiAl heat-treatment paper">DOI <span aria-hidden="true">↗</span></a>
-      </li>
-      <li>
-        <time>2022</time>
-        <div><h3>Origin of enhanced room temperature ductility in TiAl alloys: Reducing activation difference of deformation mechanism of γ phase</h3><p>The study relates the onset of deformation mechanisms in the γ phase to room-temperature ductility.</p><p class="paper-meta"><cite>Journal of Alloys and Compounds</cite> 899, 163307 · Corresponding author</p></div>
-        <a class="research-link" href="https://doi.org/10.1016/j.jallcom.2021.163307" target="_blank" rel="noopener noreferrer" aria-label="DOI for the room-temperature ductility mechanisms paper">DOI <span aria-hidden="true">↗</span></a>
-      </li>
-      <li>
-        <time>2014</time>
-        <div><h3>An in-situ transmission electron microscopy study on room temperature ductility of TiAl alloys with fully lamellar microstructure</h3><p>In situ TEM revealed differences in crack paths and bridging ligaments in TiAl alloys with different room-temperature ductilities.</p><p class="paper-meta"><cite>Materials Science and Engineering: A</cite> 589, 140–145 · First author</p></div>
-        <a class="research-link" href="https://doi.org/10.1016/j.msea.2013.09.080" target="_blank" rel="noopener noreferrer" aria-label="DOI for the in situ TEM study of TiAl ductility">DOI <span aria-hidden="true">↗</span></a>
-      </li>
-      <li>
-        <time>2012</time>
-        <div><h3>In situ observations of crack arrest and bridging by nanoscale twins in copper thin films</h3><p>In situ TEM captured how nanoscale twins bridged cracks as they propagated in copper thin films.</p><p class="paper-meta"><cite>Acta Materialia</cite> 60, 2959 · First author</p></div>
-        <a class="research-link" href="https://doi.org/10.1016/j.actamat.2012.02.002" target="_blank" rel="noopener noreferrer" aria-label="DOI for the crack bridging in copper thin films paper">DOI <span aria-hidden="true">↗</span></a>
-      </li>
-    </ol>
+    <ol class="research-papers" id="selected-publications"></ol>
+    <p id="publication-notice" hidden role="status"></p>
+    <noscript><p>논문 정보를 보려면 브라우저에서 자바스크립트를 켜 주세요.</p></noscript>
+    <script src="./publications.js"></script>
+    <script>
+(() => {
+  "use strict";
+  // Both the public page and the offline editor use these rules.
+function readDoi(value) {
+  let doi = (typeof value === "string" ? value : "").trim();
+  const resolver = /^https?:\/\/(?:dx\.)?doi\.org\//i;
+  if (resolver.test(doi)) {
+    try {
+      doi = decodeURIComponent(doi.replace(resolver, ""));
+    } catch {
+      throw new Error("DOI 주소의 문자 표기를 확인하세요.");
+    }
+  }
+  if (!/^10\.\d{4,9}\/\S+$/u.test(doi)) {
+    throw new Error("DOI 번호(10.으로 시작) 또는 doi.org 링크를 입력하세요.");
+  }
+  return doi;
+}
+
+function validate(data) {
+  if (!data || !Number.isSafeInteger(data.sciTotal) || data.sciTotal < 0) {
+    throw new Error("전체 SCI 논문 수에 0 이상의 정수를 입력하세요.");
+  }
+  if (!Array.isArray(data.selected)) throw new Error("대표 논문 목록을 확인하세요.");
+  const seen = new Set();
+  data.selected.forEach((paper, index) => {
+    try {
+      if (!paper || typeof paper.title !== "string" || !paper.title.trim()) {
+        throw new Error("제목을 입력하세요.");
+      }
+      if (typeof paper.journal !== "string" || !paper.journal.trim()) {
+        throw new Error("저널명을 입력하세요.");
+      }
+      if (!Number.isInteger(paper.year) || paper.year < 1000 || paper.year > 9999) {
+        throw new Error("발표 연도를 네 자리 숫자로 입력하세요.");
+      }
+      const doi = readDoi(paper.doi).toLowerCase();
+      if (seen.has(doi)) throw new Error("같은 DOI가 목록에 두 번 들어 있습니다.");
+      seen.add(doi);
+      for (const key of ["summary", "details", "role", "repository"]) {
+        if (paper[key] != null && typeof paper[key] !== "string") {
+          throw new Error("선택 항목은 글자로 입력하세요.");
+        }
+      }
+      if (paper.repository && !/^https?:\/\//i.test(paper.repository)) {
+        throw new Error("기관 저장소 주소는 https:// 또는 http://로 시작해야 합니다.");
+      }
+      if (paper.repository) new URL(paper.repository);
+    } catch (error) {
+      throw new Error("대표 논문 " + (index + 1) + " · " + error.message);
+    }
+  });
+}
+
+  const count = document.getElementById("sci-total");
+  const list = document.getElementById("selected-publications");
+  const notice = document.getElementById("publication-notice");
+
+  function element(tag, text, className) {
+    const node = document.createElement(tag);
+    if (text !== undefined) node.textContent = text;
+    if (className) node.className = className;
+    return node;
+  }
+
+  function link(label, url, title) {
+    const anchor = element("a", label + " ", "research-link");
+    anchor.href = url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.setAttribute("aria-label", label + " — " + title);
+    const arrow = element("span", "↗");
+    arrow.setAttribute("aria-hidden", "true");
+    anchor.append(arrow);
+    return anchor;
+  }
+
+  function paperRow(paper) {
+    const row = element("li");
+    const description = element("div");
+    description.append(element("h3", paper.title));
+    if (paper.summary) description.append(element("p", paper.summary));
+    const meta = element("p", undefined, "paper-meta");
+    meta.append(element("cite", paper.journal));
+    if (paper.details) meta.append(" " + paper.details);
+    if (paper.role) meta.append(" · " + paper.role);
+    description.append(meta);
+    row.append(element("time", String(paper.year)), description);
+    const path = readDoi(paper.doi).split("/").map(encodeURIComponent).join("/");
+    const doiLink = link("DOI", "https://doi.org/" + path, paper.title);
+    if (paper.repository) {
+      const access = element("div", undefined, "paper-access");
+      access.append(doiLink, link("Repository", paper.repository, paper.title));
+      row.append(access);
+    } else {
+      row.append(doiLink);
+    }
+    return row;
+  }
+
+  try {
+    const data = window.publications;
+    validate(data);
+    const rows = data.selected.map(paperRow);
+    list.replaceChildren(...rows);
+    count.firstChild.nodeValue = data.sciTotal + " ";
+    if (!rows.length) {
+      notice.textContent = "No selected publications.";
+      notice.hidden = false;
+    }
+  } catch (error) {
+    notice.textContent = "논문 정보를 불러오지 못했습니다. publications.js 파일을 확인하세요.";
+    notice.hidden = false;
+    console.error("Publications", error);
+  }
+})();
+</script>
   </section>
 
   <section class="research-block wrap" aria-labelledby="career-title">
