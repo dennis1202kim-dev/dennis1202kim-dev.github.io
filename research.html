@@ -31,7 +31,7 @@
   <dl class="research-facts wrap">
     <div><dt>Education</dt><dd>KAIST <span>Ph.D. in Materials Science and Engineering</span></dd></div>
     <div><dt>Appointment</dt><dd>KIMS <span>Since 2011</span></dd></div>
-    <div><dt>Publications · CV</dt><dd id="sci-total">— <span>SCI papers</span></dd></div>
+    <div><dt>Publications</dt><dd id="sci-total"><a class="research-link" href="https://scholar.google.com/citations?user=UaGUqvUAAAAJ&amp;hl=en&amp;sortby=pubdate" target="_blank" rel="noopener noreferrer" aria-label="View all publications on Google Scholar (opens in a new tab)">Google Scholar ↗</a></dd></div>
   </dl>
 
   <section class="research-block wrap research-press" aria-labelledby="awards-press-title">
@@ -265,12 +265,12 @@
     </div>
     <ol class="research-papers" id="selected-publications"></ol>
     <p id="publication-notice" hidden role="status"></p>
-    <noscript><p>논문 정보를 보려면 브라우저에서 자바스크립트를 켜 주세요.</p></noscript>
+    <noscript><p>대표 논문을 보려면 브라우저에서 자바스크립트를 켜 주세요.</p></noscript>
+    <p><a class="research-link" href="https://scholar.google.com/citations?user=UaGUqvUAAAAJ&amp;hl=en&amp;sortby=pubdate" target="_blank" rel="noopener noreferrer" aria-label="View all publications on Google Scholar, sorted by year (opens in a new tab)">View all publications on Google Scholar ↗</a></p>
     <script src="./publications.js"></script>
     <script>
 (() => {
   "use strict";
-  // Both the public page and the offline editor use these rules.
 function readDoi(value) {
   let doi = (typeof value === "string" ? value : "").trim();
   const resolver = /^https?:\/\/(?:dx\.)?doi\.org\//i;
@@ -288,10 +288,7 @@ function readDoi(value) {
 }
 
 function validate(data) {
-  if (!data || !Number.isSafeInteger(data.sciTotal) || data.sciTotal < 0) {
-    throw new Error("전체 SCI 논문 수에 0 이상의 정수를 입력하세요.");
-  }
-  if (!Array.isArray(data.selected)) throw new Error("대표 논문 목록을 확인하세요.");
+  if (!data || !Array.isArray(data.selected)) throw new Error("대표 논문 목록을 확인하세요.");
   const seen = new Set();
   data.selected.forEach((paper, index) => {
     try {
@@ -322,7 +319,6 @@ function validate(data) {
   });
 }
 
-  const count = document.getElementById("sci-total");
   const list = document.getElementById("selected-publications");
   const notice = document.getElementById("publication-notice");
 
@@ -373,7 +369,6 @@ function validate(data) {
     validate(data);
     const rows = data.selected.map(paperRow);
     list.replaceChildren(...rows);
-    count.firstChild.nodeValue = data.sciTotal + " ";
     if (!rows.length) {
       notice.textContent = "No selected publications.";
       notice.hidden = false;

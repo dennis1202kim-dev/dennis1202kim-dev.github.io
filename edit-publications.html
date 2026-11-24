@@ -32,7 +32,7 @@ details[open]>summary{border-bottom:1px solid var(--line)}
 </style>
 </head>
 <body><main>
-<header><h1>김성웅 · 논문 관리</h1><p>전체 SCI 논문 수와 대표 논문을 편집할 수 있습니다. 입력 내용은 다운로드한 관리 파일에 저장됩니다.</p></header>
+<header><h1>김성웅 · 논문 관리</h1><p>홈페이지에 따로 소개할 대표 논문만 여기서 편집하세요. 전체 논문 목록은 Google Scholar에서 열립니다.</p></header>
 <nav aria-label="관련 페이지" style="margin-top:14px"><a href="research.html">연구자 홈페이지</a> · <a href="./publications-guide.txt">사용 안내</a></nav>
 <section aria-label="관리 파일"><div class="actions">
   <button type="button" id="open-file">관리 파일 불러오기</button>
@@ -40,8 +40,8 @@ details[open]>summary{border-bottom:1px solid var(--line)}
 </div><p class="hint" id="source-info"></p></section>
 <form id="editor">
 <fieldset id="controls" disabled>
-<section class="block"><label class="field">전체 SCI 논문 수<input id="total" type="number" min="0" step="1" required></label>
-<p class="hint">대표 목록을 바꿔도 이 숫자는 그대로입니다. 실제 게재 편수가 늘었을 때 직접 수정하세요.</p></section>
+<section class="block"><label class="field">전체 SCI 논문 수 (관리용 기록)<input id="total" type="number" min="0" step="1" required></label>
+<p class="hint">기존 관리 파일의 기록입니다. 새 논문을 발표해도 이 숫자를 수정할 필요가 없습니다.</p></section>
 <section><div class="section-head"><h2 id="list-title">대표 논문</h2><button type="button" id="add">+ 대표 논문 추가</button></div>
 <p class="hint">제목을 눌러 수정할 수 있습니다. 위에서부터 홈페이지에 표시됩니다.</p>
 <div id="papers"></div></section>
@@ -231,7 +231,7 @@ function validate(data) {
     const card = button.closest("details");
     const action = button.dataset.action;
     if (action === "remove") {
-      if (!confirm("이 논문을 대표 목록에서 삭제할까요? 전체 SCI 논문 수는 직접 조정할 수 있습니다.")) return;
+      if (!confirm("이 논문을 홈페이지의 대표 목록에서 삭제할까요?")) return;
       card.remove();
     } else if (action === "up" && card.previousElementSibling) {
       papers.insertBefore(card, card.previousElementSibling);
